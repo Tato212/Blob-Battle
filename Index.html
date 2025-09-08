@@ -1,59 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Blob Battle</title>
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-top: 5px solid green;
-      border-bottom: 5px solid green;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px red;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 3rem;
-      color: #ff4c4c;
-    }
-    a.play-button {
-      background-color: green;
-      color: white;
-      text-decoration: none;
-      font-size: 2rem;
-      padding: 1rem 3rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px green
-  ;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    a.play-button:hover {
-      background-color: #87E000;
-      box-shadow: 0 0 25px #ff0000;
-    }
-  </style>
-</head>
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blob Battle - Main Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Using the uploaded image as the background */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image_5420ff.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Lilita One', cursive;
+        }
 
-  <h1>Blob Battle Game!</h1>
-  <p>Enjoy intense battles, or simulation!</p>
-  <a href="game.html" class="play-button">PLAY</a>
+        .game-title {
+            font-size: 6rem; /* Responsive font size */
+            color: #ffffff;
+            text-shadow: 
+                -4px -4px 0 #000,  
+                 4px -4px 0 #000,
+                -4px  4px 0 #000,
+                 4px  4px 0 #000,
+                 -6px 6px 0 #3b82f6; /* Blueish shadow for depth */
+        }
+        
+        @media (max-width: 640px) {
+            .game-title {
+                font-size: 4rem;
+            }
+        }
+
+        .menu-button {
+            transition: all 0.2s ease-in-out;
+            border: 4px solid #000;
+            box-shadow: 0 8px 0 #000;
+            cursor: pointer;
+        }
+
+        .menu-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #000;
+        }
+        
+        .menu-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #000;
+        }
+        
+        .coming-soon-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-800 text-white h-screen flex items-center justify-center p-4">
+
+    <!-- Main Menu Container -->
+    <div class="text-center">
+        <h1 class="game-title mb-12">Blob Battle</h1>
+
+        <div class="space-y-6">
+            <!-- Endless Mode Button -->
+            <a href="game.html" class="menu-button block w-full max-w-sm mx-auto bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-2xl text-3xl tracking-wider">
+                Endless Mode
+            </a>
+
+            <!-- Campaign Button -->
+            <button id="campaignButton" class="menu-button w-full max-w-sm mx-auto bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-2xl text-3xl tracking-wider">
+                Campaign
+            </button>
+        </div>
+    </div>
+
+    <!-- "Coming Soon" Modal -->
+    <div id="comingSoonModal" class="coming-soon-modal invisible opacity-0 fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4">
+        <div class="bg-blue-600 border-4 border-black rounded-2xl p-8 text-center shadow-2xl relative max-w-md w-full">
+            <h2 class="text-4xl mb-4 text-white" style="text-shadow: -2px 2px 0 #000;">Coming Soon!</h2>
+            <p class="text-xl mb-6 text-blue-100">The Campaign mode is still under development. Stay tuned for exciting new adventures!</p>
+            <button id="closeModalButton" class="menu-button w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl text-2xl">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const campaignButton = document.getElementById('campaignButton');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const comingSoonModal = document.getElementById('comingSoonModal');
+
+        // Function to show the modal
+        function showModal() {
+            comingSoonModal.classList.remove('invisible', 'opacity-0');
+        }
+
+        // Function to hide the modal
+        function hideModal() {
+            comingSoonModal.classList.add('invisible', 'opacity-0');
+        }
+
+        // Event listeners
+        campaignButton.addEventListener('click', showModal);
+        closeModalButton.addEventListener('click', hideModal);
+        
+        // Also hide modal if user clicks on the background
+        comingSoonModal.addEventListener('click', function(event) {
+            if (event.target === comingSoonModal) {
+                hideModal();
+            }
+        });
+    </script>
 
 </body>
 </html>
-
-
-
